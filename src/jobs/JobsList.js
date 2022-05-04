@@ -27,6 +27,8 @@ function JobsList() {
   function renderJobDetails() {
     if (jobsList.length === 0) {
       return <i>Loading...</i>;
+    } else if (jobsList[0] === null) {
+      return <em>No jobs found!</em>;
     } else {
       return <JobCardList jobs={jobsList} />;
     }
@@ -34,7 +36,8 @@ function JobsList() {
 
   /** Calls API to retrieve jobs by search term */
   async function searchJobs(searchTerm) {
-    const jobSearchRes = await JoblyApi.getJobs({ title: searchTerm });
+    let jobSearchRes = await JoblyApi.getJobs({ title: searchTerm });
+    jobSearchRes = jobSearchRes.length === 0 ? [null] : jobSearchRes;
     setJobsList(jobSearchRes);
   }
 
