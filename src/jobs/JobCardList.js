@@ -1,7 +1,15 @@
 import JobCard from "./JobCard";
 
+/** JobCardList displays job cards
+ *
+ * props - jobs array
+ * state - none
+ *
+ * JobsList, CompaniesList --> { JobCardList } --> JobCard
+ */
 function JobCardList({ jobs }) {
-  console.log(jobs);
+
+  /** Displays job cards */
   function renderJobCards() {
     if (jobs === undefined) {
       return <i>Jobs Loading...</i>;

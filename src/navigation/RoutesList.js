@@ -1,10 +1,11 @@
 import { Route, Routes, Navigate } from "react-router-dom";
-import Home from "./Home";
-import CompanyDetail from "./CompanyDetail";
-import CompaniesList from "./CompaniesList";
-import JobsList from "./JobsList";
+import Home from "../common/Home";
+import CompanyDetail from "../companies/CompanyDetail";
+import CompaniesList from "../companies/CompaniesList";
+import JobsList from "../jobs/JobsList";
 
 /** Routes list defines routes for components */
+
 function RoutesList() {
   return (
     <Routes>

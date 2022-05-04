@@ -1,6 +1,12 @@
 import { Link } from "react-router-dom";
 
-/** Displays company information */
+/** Displays company information as link to company detail
+ *
+ * props - company
+ * state - none
+ * 
+ * CompaniesList --> { CompanyCard } --> CompanyDetail
+*/
 
 function CompanyCard({ company }) {
   return (

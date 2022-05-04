@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import JoblyApi from "./joblyApi";
-import JobCardList from "./JobCardList";
+import JoblyApi from "../helpers/joblyApi";
+import JobCardList from "../jobs/JobCardList";
+import SearchForm from "../common/SearchForm";
 
 /** Renders detail on company based on handle parameter. Makes API call
  *
@@ -10,12 +11,15 @@ import JobCardList from "./JobCardList";
  *
  * Effect:
  * - set company on mount
+ *
+ * RoutesList --> {CompanyDetail} --> JobCardList
  */
 
 function CompanyDetail() {
   const params = useParams();
   const [company, setCompany] = useState(null);
 
+  /** API call to retrieve single company on initial render */
   useEffect(function getCompanyOnMount() {
     async function getCompany() {
       const c = await JoblyApi.getCompany(params.handle);
@@ -24,6 +28,7 @@ function CompanyDetail() {
     getCompany();
   }, []);
 
+  /** Displays company details and JobsCardList of associated jobs */
   function renderCompanyDetails() {
     if (company === null) {
       return <i>Loading...</i>;
@@ -38,7 +43,12 @@ function CompanyDetail() {
     }
   }
 
-  return <div>{renderCompanyDetails()}</div>;
+  return (
+    <>
+
+      <div>{renderCompanyDetails()}</div>
+    </>
+  );
 }
 
 export default CompanyDetail;
