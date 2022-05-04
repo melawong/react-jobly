@@ -17,7 +17,7 @@ import SearchForm from "../common/SearchForm";
 
 function CompanyDetail() {
   const params = useParams();
-  const [company, setCompany] = useState(null);
+  const [company, setCompany] = useState({});
 
   /** API call to retrieve single company on initial render */
   useEffect(function getCompanyOnMount() {
@@ -30,7 +30,7 @@ function CompanyDetail() {
 
   /** Displays company details and JobsCardList of associated jobs */
   function renderCompanyDetails() {
-    if (company === null) {
+    if (Object.keys(company).length === 0) {
       return <i>Loading...</i>;
     } else {
       return (
@@ -45,7 +45,6 @@ function CompanyDetail() {
 
   return (
     <>
-
       <div>{renderCompanyDetails()}</div>
     </>
   );

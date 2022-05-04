@@ -26,12 +26,21 @@ function CompaniesList() {
 
   /** Displays all company cards */
   function renderCompanies() {
-    return companiesList.map((c) => <CompanyCard key={c.handle} company={c} />);
+    if (companiesList.length === 0) {
+      return <i>Loading...</i>;
+    } else if (companiesList[0] === null) {
+      return <em>No companies found!</em>;
+    } else {
+      return companiesList.map((c) => (
+        <CompanyCard key={c.handle} company={c} />
+      ));
+    }
   }
 
   /** API call to retrieve companies list based on search */
   async function searchCompanies(searchTerm) {
-    const compSearchRes = await JoblyApi.getCompanies({ name: searchTerm });
+    let compSearchRes = await JoblyApi.getCompanies({ name: searchTerm });
+    compSearchRes = compSearchRes.length === 0 ? [null] : compSearchRes;
     setCompaniesList(compSearchRes);
   }
 

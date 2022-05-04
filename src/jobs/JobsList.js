@@ -3,7 +3,6 @@ import JobCardList from "./JobCardList";
 import JoblyApi from "../helpers/joblyApi";
 import SearchForm from "../common/SearchForm";
 
-
 /** JobsList component calls API to get list of jobs to display
  *
  * props - none
@@ -11,7 +10,7 @@ import SearchForm from "../common/SearchForm";
  * effect - getJobsOnMount
  *
  * RoutesList --> { JobsList } --> SearchForm, JobCardList
-  */
+ */
 function JobsList() {
   const [jobsList, setJobsList] = useState([]);
 
@@ -26,7 +25,7 @@ function JobsList() {
 
   /** Displays loading state or list of job cards */
   function renderJobDetails() {
-    if (jobsList === null) {
+    if (jobsList.length === 0) {
       return <i>Loading...</i>;
     } else {
       return <JobCardList jobs={jobsList} />;
