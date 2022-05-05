@@ -12,7 +12,8 @@ function JobCard({ job }) {
   const { user, handleApplication } = useContext(UserContext);
   function renderButton() {
     if (user) {
-      return user.applications.includes(job.id) ? (
+      // make job array in uwer into a set
+      return user.applications.has(job.id) ? (
         <button disabled>Applied</button>
       ) : (
         <button>Apply</button>

@@ -13,6 +13,7 @@ const TOKEN_NAME = "joblyToken";
 
 function App() {
   const [user, setUser] = useState(null);
+  const [loaded, setLoaded] = useState(false);
   const [token, setToken] = useState(localStorage.getItem(TOKEN_NAME));
 
   useEffect(
@@ -20,9 +21,14 @@ function App() {
       async function getUser() {
         if (token) {
           JoblyApi.token = token;
-          const userInfo = await JoblyApi.getUser(jwtDecode(token).username);
-          setUser(userInfo);
+          const username = jwtDecode(token).username;
+          const userInfo = await JoblyApi.getUser(username);
+          setUser({
+            ...userInfo,
+            applications: new Set(userInfo.applications),
+          });
         }
+        setLoaded(true);
       }
       getUser();
     },
@@ -69,12 +75,12 @@ function App() {
 
     setUser((user) => ({
       ...user,
-      applications: [...user.applications, newJobId],
+      applications: new Set([...user.applications, newJobId]),
     }));
     return newJobId;
   }
 
-  return (
+  return loaded ? (
     <div className="App">
       <BrowserRouter>
         <UserContext.Provider
@@ -93,6 +99,8 @@ function App() {
         </UserContext.Provider>
       </BrowserRouter>
     </div>
+  ) : (
+    <p>Loading...</p>
   );
 }
 

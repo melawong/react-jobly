@@ -33,17 +33,18 @@ function LoginForm() {
   function renderFormFields() {
     const formFields = Object.keys(initialState);
     return formFields.map((f) => (
-      <input
-        type={f === "password" ? "password" : "text"}
-        id={f}
-        key={f}
-        name={f}
-        className="form-control"
-        placeholder={`Enter ${f}...`}
-        onChange={handleChange}
-        value={formData[f]}
-        aria-label={f}
-      />
+      <div key={f}>
+        <input
+          type={f === "password" ? "password" : "text"}
+          id={f}
+          name={f}
+          className="form-control"
+          placeholder={`Enter ${f}...`}
+          onChange={handleChange}
+          value={formData[f]}
+          aria-label={f}
+        />
+      </div>
     ));
   }
 

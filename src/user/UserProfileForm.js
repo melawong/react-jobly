@@ -18,20 +18,6 @@ function UserProfileForm() {
     email,
   });
 
-  //   useEffect(function getUserInfoOnMount() {
-  //     async function getUserInfo() {
-  //       const userInfo = await getUser(user.username);
-  //       setFormData({
-  //         username: userInfo.username,
-  //         firstName: userInfo.firstName,
-  //         lastName: userInfo.lastName,
-  //         email: userInfo.email,
-  //       });
-  //     }
-  //     getUserInfo();
-  //     console.log(formData);
-  //   }, []);
-
   /** Update form input. */
   function handleChange(evt) {
     const { name, value } = evt.target;
@@ -59,17 +45,18 @@ function UserProfileForm() {
   function renderFormFields() {
     const formFields = Object.keys(formData);
     return formFields.map((f) => (
-      <input
-        id={f}
-        key={f}
-        name={f}
-        disabled={f === "username"}
-        className="form-control"
-        placeholder={`Enter ${f}...`}
-        onChange={handleChange}
-        value={formData[f]}
-        aria-label={f}
-      />
+      <div key={f}>
+        <input
+          id={f}
+          name={f}
+          disabled={f === "username"}
+          className="form-control"
+          placeholder={`Enter ${f}...`}
+          onChange={handleChange}
+          value={formData[f]}
+          aria-label={f}
+        />
+      </div>
     ));
   }
 
