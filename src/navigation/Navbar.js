@@ -5,7 +5,7 @@ import UserContext from "../userContext";
 /** Navigation bar displays links to routes */
 
 function Navbar() {
-  const { user } = useContext(UserContext);
+  const { user, logout } = useContext(UserContext);
 
   function renderLinks() {
     return user ? (
@@ -20,7 +20,9 @@ function Navbar() {
           <Link to={`/profile`}>Profile</Link>
         </span>
         <span>
-          <Link to={`/logout`}>Logout</Link>
+          <Link to={`/logout`} onClick={logout}>
+            Logout {user.username}
+          </Link>
         </span>
       </>
     ) : (
