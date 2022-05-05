@@ -54,11 +54,30 @@ function App() {
     JoblyApi.token = "";
   }
 
+  async function getUser(username) {
+    const userInfo = await JoblyApi.getUser(username);
+    return userInfo;
+  }
+
+  async function handleUserUpdate(username, formData) {
+    console.log("token in handleclikc", JoblyApi.token);
+    const updatedUserInfo = await JoblyApi.updateUser(username, formData);
+    return updatedUserInfo;
+  }
+
   return (
     <div className="App">
       <BrowserRouter>
         <UserContext.Provider
-          value={{ user, token, handleLogin, handleSignup, logout }}
+          value={{
+            user,
+            token,
+            handleLogin,
+            handleSignup,
+            logout,
+            getUser,
+            handleUserUpdate,
+          }}
         >
           <Navbar />
           <RoutesList />

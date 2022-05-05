@@ -41,7 +41,7 @@ function LoginForm() {
         className="form-control"
         placeholder={`Enter ${f}...`}
         onChange={handleChange}
-        value={formData.f}
+        value={formData[f]}
         aria-label={f}
       />
     ));
