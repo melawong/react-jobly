@@ -9,22 +9,28 @@ import UserContext from "../userContext";
  */
 
 function UserProfileForm() {
-  const { user, getUser, handleUserUpdate } = useContext(UserContext);
-  const [formData, setFormData] = useState({});
+  const { user, handleUserUpdate } = useContext(UserContext);
+  const { username, firstName, lastName, email } = user;
+  const [formData, setFormData] = useState({
+    username,
+    firstName,
+    lastName,
+    email,
+  });
 
-  useEffect(function getUserInfoOnMount() {
-    async function getUserInfo() {
-      const userInfo = await getUser(user.username);
-      setFormData({
-        username: userInfo.username,
-        firstName: userInfo.firstName,
-        lastName: userInfo.lastName,
-        email: userInfo.email,
-      });
-    }
-    getUserInfo();
-    console.log(formData);
-  }, []);
+  //   useEffect(function getUserInfoOnMount() {
+  //     async function getUserInfo() {
+  //       const userInfo = await getUser(user.username);
+  //       setFormData({
+  //         username: userInfo.username,
+  //         firstName: userInfo.firstName,
+  //         lastName: userInfo.lastName,
+  //         email: userInfo.email,
+  //       });
+  //     }
+  //     getUserInfo();
+  //     console.log(formData);
+  //   }, []);
 
   /** Update form input. */
   function handleChange(evt) {
@@ -36,14 +42,16 @@ function UserProfileForm() {
   async function handleSubmit(evt) {
     evt.preventDefault();
     const { firstName, lastName, email } = formData;
-    const updatedData = await handleUserUpdate(user.username, {
+    const updatedData = await handleUserUpdate(username, {
       firstName,
       lastName,
       email,
     });
     setFormData((formData) => ({
       ...formData,
-      ...updatedData,
+      firstName: updatedData.firstName,
+      lastName: updatedData.lastName,
+      email: updatedData.email,
     }));
   }
 
@@ -55,6 +63,7 @@ function UserProfileForm() {
         id={f}
         key={f}
         name={f}
+        disabled={f === "username"}
         className="form-control"
         placeholder={`Enter ${f}...`}
         onChange={handleChange}

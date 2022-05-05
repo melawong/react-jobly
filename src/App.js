@@ -15,25 +15,26 @@ function App() {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem(TOKEN_NAME));
 
-  useEffect(function getTokenOnMount() {
-    async function getToken() {
-      const userToken = localStorage.getItem(TOKEN_NAME);
-      if (userToken) {
-        setToken(userToken);
-        setUser(jwtDecode(userToken));
+  useEffect(
+    function getUserOnMount() {
+      async function getUser() {
+        if (token) {
+          JoblyApi.token = token;
+          const userInfo = await JoblyApi.getUser(jwtDecode(token).username);
+          setUser(userInfo);
+        }
       }
-    }
-    getToken();
-  }, []);
+      getUser();
+    },
+    [token]
+  );
 
   /** Make API call to log in user */
 
   async function handleLogin(formData) {
     const userToken = await JoblyApi.login(formData);
     setToken(userToken);
-    setUser(jwtDecode(userToken));
     localStorage.setItem(TOKEN_NAME, userToken);
-    JoblyApi.token = userToken;
   }
 
   /** Make API call to sign up user */
@@ -41,28 +42,36 @@ function App() {
   async function handleSignup(formData) {
     const newUserToken = await JoblyApi.signUp(formData);
     setToken(newUserToken);
-    setUser(jwtDecode(newUserToken));
     localStorage.setItem(TOKEN_NAME, newUserToken);
-    JoblyApi.token = newUserToken;
   }
 
   /** Log user out, reset states and local storage */
   function logout() {
     localStorage.removeItem(TOKEN_NAME);
     setToken("");
-    setUser(null);
     JoblyApi.token = "";
-  }
-
-  async function getUser(username) {
-    const userInfo = await JoblyApi.getUser(username);
-    return userInfo;
+    setUser(null);
   }
 
   async function handleUserUpdate(username, formData) {
-    console.log("token in handleclikc", JoblyApi.token);
     const updatedUserInfo = await JoblyApi.updateUser(username, formData);
+
+    setUser((user) => ({
+      ...user,
+      ...updatedUserInfo,
+    }));
+
     return updatedUserInfo;
+  }
+
+  async function handleApplication(username, jobId) {
+    const newJobId = await JoblyApi.apply(username, jobId);
+
+    setUser((user) => ({
+      ...user,
+      applications: [...user.applications, newJobId],
+    }));
+    return newJobId;
   }
 
   return (
@@ -75,8 +84,8 @@ function App() {
             handleLogin,
             handleSignup,
             logout,
-            getUser,
             handleUserUpdate,
+            handleApplication,
           }}
         >
           <Navbar />
