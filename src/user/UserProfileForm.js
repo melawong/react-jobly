@@ -45,7 +45,7 @@ function UserProfileForm() {
   function renderFormFields() {
     const formFields = Object.keys(formData);
     return formFields.map((f) => (
-      <div key={f}>
+      <div className="p-1" key={f}>
         <input
           id={f}
           name={f}
@@ -61,10 +61,10 @@ function UserProfileForm() {
   }
 
   return (
-    <form className="UpdateUserForm" onSubmit={handleSubmit}>
-      <div className="mb-3">
+    <form className="UpdateUserForm container" onSubmit={handleSubmit}>
+      <div className="mb-3 col-md-6 mx-auto mt-2">
         {renderFormFields()}
-        <button>Save Changes!</button>
+        <button className="btn btn-info">Save Changes!</button>
       </div>
     </form>
   );

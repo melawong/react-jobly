@@ -8,7 +8,6 @@ import JobCard from "./JobCard";
  * JobsList, CompaniesList --> { JobCardList } --> JobCard
  */
 function JobCardList({ jobs }) {
-
   /** Displays job cards */
   function renderJobCards() {
     if (jobs === undefined) {
@@ -18,7 +17,11 @@ function JobCardList({ jobs }) {
     }
   }
 
-  return <div>{renderJobCards()}</div>;
+  return (
+    <div className="container-flex">
+      {renderJobCards()}
+    </div>
+  );
 }
 
 export default JobCardList;

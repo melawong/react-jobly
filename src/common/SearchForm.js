@@ -22,23 +22,26 @@ function SearchForm({ handleSearch }) {
   function handleSubmit(evt) {
     evt.preventDefault();
     handleSearch(formData.search);
-    setFormData({ search: "" });
   }
 
   return (
-    <form className="SearchForm" onSubmit={handleSubmit}>
-      <div className="mb-3">
-        <input
-          id="search-form"
-          name="search"
-          className="form-control"
-          placeholder="Enter search term..."
-          onChange={handleChange}
-          value={formData.search}
-          aria-label="search"
-        />
-        <button>Submit!</button>
-      </div>
+    <form
+      className="SearchForm container input-group mb-3 col-md-6 mt-2"
+      onSubmit={handleSubmit}
+    >
+      <input
+        id="search-form"
+        name="search"
+        className="form-control"
+        placeholder="Enter search term..."
+        onChange={handleChange}
+        value={formData.search}
+        aria-label="search"
+        aria-describedby="button-addon2"
+      />
+      <button className="btn btn-info" id="button-addon2">
+        Submit!
+      </button>
     </form>
   );
 }

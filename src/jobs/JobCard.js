@@ -14,9 +14,11 @@ function JobCard({ job }) {
     if (user) {
       // make job array in uwer into a set
       return user.applications.has(job.id) ? (
-        <button disabled>Applied</button>
+        <button className="btn btn-success" disabled>
+          Applied
+        </button>
       ) : (
-        <button>Apply</button>
+        <button className="btn btn-primary">Apply</button>
       );
     }
   }
@@ -27,12 +29,17 @@ function JobCard({ job }) {
   }
 
   return (
-    <div>
-      <h3>{job.title}</h3>
-      <h4>{job.companyName}</h4>
-      <p>Salary: {job.salary}</p>
-      <p>Equity: {job.equity}</p>
-      <form onSubmit={handleSubmit}>{renderButton()}</form>
+    <div
+      className="card border-secondary mb-3 mx-auto container-flex"
+      style={{ maxWidth: "40rem" }}
+    >
+      <div className="card-header">{job.companyName}</div>
+      <div className="card-body">
+        <h4 className="card-title">{job.title}</h4>
+        <p className="card-text">Salary: {job.salary}</p>
+        <p className="card-text">Equity: {job.equity}</p>
+        <form onSubmit={handleSubmit}>{renderButton()}</form>
+      </div>
     </div>
   );
 }

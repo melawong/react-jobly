@@ -36,7 +36,9 @@ function JobsList() {
 
   /** Calls API to retrieve jobs by search term */
   async function searchJobs(searchTerm) {
-    let jobSearchRes = await JoblyApi.getJobs({ title: searchTerm });
+    let jobSearchRes = searchTerm
+      ? await JoblyApi.getJobs({ title: searchTerm })
+      : await JoblyApi.getJobs();
     jobSearchRes = jobSearchRes.length === 0 ? [null] : jobSearchRes;
     setJobsList(jobSearchRes);
   }

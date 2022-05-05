@@ -1,3 +1,4 @@
+import "../App.css";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { useContext } from "react";
 import UserContext from "../userContext";

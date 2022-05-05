@@ -5,21 +5,27 @@ import UserContext from "../userContext";
 function Home() {
   const { user } = useContext(UserContext);
   return (
-    <div>
-      <h1>Jobly</h1>
-      <h4>All the jobs in one, convenient place.</h4>
-      {user ? (
-        <h2> Welcome Back, {user.username}! </h2>
-      ) : (
-        <>
-          <span>
-            <Link to={`/login`}>Login</Link>
-          </span>
-          <span>
-            <Link to={`/signup`}>Signup</Link>
-          </span>
-        </>
-      )}
+    <div className="homepage">
+      <div className="col-12">
+        <h1>Jobly</h1>
+        <p>All the jobs in one, convenient place.</p>
+        {user ? (
+          <h2> Welcome Back, {user.username}! </h2>
+        ) : (
+          <>
+            <button className="btn btn-primary mx-1">
+              <Link to={`/login`} style={{ textDecoration: "none" }}>
+                Login
+              </Link>
+            </button>
+            <button className="btn btn-primary mx-1">
+              <Link to={`/signup`} style={{ textDecoration: "none" }}>
+                Signup
+              </Link>
+            </button>
+          </>
+        )}
+      </div>
     </div>
   );
 }

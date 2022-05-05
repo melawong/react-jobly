@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import UserContext from "../userContext";
 
+
 /** Navigation bar displays links to routes */
 
 function Navbar() {
@@ -10,43 +11,70 @@ function Navbar() {
   function renderLinks() {
     return user ? (
       <>
-        <span>
-          <Link to={`/companies`}>Companies</Link>
-        </span>
-        <span>
-          <Link to={`/jobs`}>Jobs</Link>
-        </span>
-        <span>
-          <Link to={`/profile`}>Profile</Link>
-        </span>
-        <span>
-          <Link to={`/logout`} onClick={logout}>
+        <li className="nav-item">
+          <Link to={`/companies`} className="nav-link" href="#">
+            Companies
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link to={`/jobs`} className="nav-link" href="#">
+            Jobs
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link to={`/profile`} className="nav-link" href="#">
+            Profile
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link to={`/logout`} onClick={logout} className="nav-link" href="#">
             Logout {user.username}
           </Link>
-        </span>
+        </li>
       </>
     ) : (
       <>
-        <span>
-          <Link to={`/login`}>Login</Link>
-        </span>
-        <span>
-          <Link to={`/signup`}>Signup</Link>
-        </span>
+        <li className="nav-item">
+          <Link to={`/login`} className="nav-link" href="#">
+            Login
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link to={`/signup`} className="nav-link" href="#">
+            Signup
+          </Link>
+        </li>
       </>
     );
   }
 
   return (
     <>
-      <nav>
-        <span>
-          <Link to={`/`}>Jobly</Link>
-        </span>
-        {renderLinks()}
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <div className="container-fluid">
+          <Link to={`/`} className="navbar-brand" href="#">
+            Jobly
+          </Link>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarColor03"
+            aria-controls="navbarColor03"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarColor03">
+            <ul className="navbar-nav ms-auto">{renderLinks()}</ul>
+          </div>
+        </div>
       </nav>
     </>
   );
 }
 
 export default Navbar;
+
+

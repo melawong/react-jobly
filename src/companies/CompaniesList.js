@@ -39,7 +39,9 @@ function CompaniesList() {
 
   /** API call to retrieve companies list based on search */
   async function searchCompanies(searchTerm) {
-    let compSearchRes = await JoblyApi.getCompanies({ name: searchTerm });
+    let compSearchRes = searchTerm
+      ? await JoblyApi.getCompanies({ name: searchTerm })
+      : await JoblyApi.getCompanies();
     compSearchRes = compSearchRes.length === 0 ? [null] : compSearchRes;
     setCompaniesList(compSearchRes);
   }

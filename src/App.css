@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.homepage {
+  height: calc(100vh - 150px);
+  display: flex;
+  align-items: center;
+  color: #fff;
+  text-shadow: 2px 2px 5px #34302f;
+}
