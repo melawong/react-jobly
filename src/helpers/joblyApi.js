@@ -53,6 +53,12 @@ class JoblyApi {
     return res.jobs;
   }
 
+  /** Get list of all jobs matching search request */
+  static async getJob(jobId) {
+    let res = await this.request(`jobs/${jobId}`);
+    return res.job;
+  }
+
   /** Sign up a user, returns token */
   static async signUp(formData) {
     let res = await this.request("auth/register", formData, "post");

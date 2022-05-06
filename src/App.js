@@ -23,9 +23,15 @@ function App() {
           JoblyApi.token = token;
           const username = jwtDecode(token).username;
           const userInfo = await JoblyApi.getUser(username);
+          // want an array of job objects. we have array of job ids
+          const jobPromises = userInfo.applications.map((id) =>
+            JoblyApi.getJob(id)
+          );
+          const jobs = await Promise.all(jobPromises);
           setUser({
             ...userInfo,
             applications: new Set(userInfo.applications),
+            jobs,
           });
         }
         setLoaded(true);

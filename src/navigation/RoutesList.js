@@ -6,7 +6,7 @@ import Home from "../common/Home";
 import CompanyDetail from "../companies/CompanyDetail";
 import CompaniesList from "../companies/CompaniesList";
 import JobsList from "../jobs/JobsList";
-import UserProfileForm from "../user/UserProfileForm";
+import UserProfile from "../user/UserProfile";
 import LoginForm from "../user/LoginForm";
 import SignupForm from "../user/SignupForm";
 
@@ -21,7 +21,7 @@ function RoutesList() {
         <Route path="/companies" element={<CompaniesList />} />
         <Route path="/jobs" element={<JobsList />} />
         <Route path="/companies/:handle" element={<CompanyDetail />} />
-        <Route path="/profile" element={<UserProfileForm />} />
+        <Route path="/profile" element={<UserProfile />} />
         <Route path="/logout" element={<Navigate to="/" />} />
       </>
     ) : (
