@@ -71,15 +71,25 @@ function UserProfileForm() {
     );
   }
 
+  function renderJobApplications() {
+    return user ? user.applications.map((a) => <li>{a}</li>) : "";
+  }
+
   return (
-    <form className="UpdateUserForm container" onSubmit={handleSubmit}>
-      <h2 className="mt-2">Your Profile</h2>
-      <div className="mb-3 col-md-6 mx-auto mt-2">
-        {renderFormFields()}
-        {renderFlashMessage()}
-        <button className="btn btn-info">Save Changes!</button>
+    <div className="row container-flex">
+      <form className="UpdateUserForm col-md-6" onSubmit={handleSubmit}>
+        <h2 className="mt-2">Edit Profile</h2>
+        <div className="mb-3 col-md-6 mx-auto mt-2">
+          {renderFormFields()}
+          {renderFlashMessage()}
+          <button className="btn btn-info">Save Changes!</button>
+        </div>
+      </form>
+      <div className="col-md-6 mt-2">
+        <h2> Job Applications </h2>
+        <ul>{renderJobApplications()}</ul>
       </div>
-    </form>
+    </div>
   );
 }
 
