@@ -26,7 +26,7 @@ function SearchForm({ handleSearch }) {
 
   return (
     <form
-      className="SearchForm container input-group mb-3 col-md-6 mt-2"
+      className="SearchForm container input-group mb-3 col-md-4 mt-2"
       onSubmit={handleSubmit}
     >
       <input

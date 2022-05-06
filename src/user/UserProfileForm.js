@@ -1,5 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import UserContext from "../userContext";
+import FlashMessage from "../common/FlashMessage";
 
 /** UserProfile form component
  *
@@ -11,6 +12,7 @@ import UserContext from "../userContext";
 function UserProfileForm() {
   const { user, handleUserUpdate } = useContext(UserContext);
   const { username, firstName, lastName, email } = user;
+  const [hasUpdated, setHasUpdated] = useState(false);
   const [formData, setFormData] = useState({
     username,
     firstName,
@@ -39,6 +41,7 @@ function UserProfileForm() {
       lastName: updatedData.lastName,
       email: updatedData.email,
     }));
+    setHasUpdated(true);
   }
 
   /** Create form fields  */
@@ -60,10 +63,20 @@ function UserProfileForm() {
     ));
   }
 
+  function renderFlashMessage() {
+    return hasUpdated ? (
+      <FlashMessage message="Updated successfully!" alertStatus="success" />
+    ) : (
+      ""
+    );
+  }
+
   return (
     <form className="UpdateUserForm container" onSubmit={handleSubmit}>
+      <h2 className="mt-2">Your Profile</h2>
       <div className="mb-3 col-md-6 mx-auto mt-2">
         {renderFormFields()}
+        {renderFlashMessage()}
         <button className="btn btn-info">Save Changes!</button>
       </div>
     </form>

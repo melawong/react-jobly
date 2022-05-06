@@ -12,17 +12,25 @@ function CompanyCard({ company }) {
   return (
     <Link
       to={`/companies/${company.handle}`}
-      style={{ textDecoration: "none" }}
+      style={{ textDecoration: "none", maxWidth: "50rem" }}
+      className="card border-light mb-3 mx-auto d-flex"
     >
-      <div
-        className="card border-light mb-3 mx-auto"
-        style={{ maxWidth: "50rem" }}
-      >
-        <div className="card-body">
-          <h4 className="card-title">{company.name}</h4>
-          <p className="card-text">{company.description}</p>
-          <img src={company.logoUrl} alt={company.handle} />
-        </div>
+      <div className="card-body">
+        <h4 className="card-title">
+          {company.logoUrl ? (
+            <img
+              src={company.logoUrl}
+              alt={company.handle}
+              style={{ height: "20px" }}
+            />
+          ) : (
+            ""
+          )}
+          {"           "}
+          {company.name}
+        </h4>
+
+        <p className="card-text">{company.description}</p>
       </div>
     </Link>
   );

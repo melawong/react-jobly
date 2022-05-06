@@ -33,7 +33,7 @@ function LoginForm() {
   function renderFormFields() {
     const formFields = Object.keys(initialState);
     return formFields.map((f) => (
-      <div key={f}>
+      <div className="p-1 col-md-6 mx-auto" key={f}>
         <input
           type={f === "password" ? "password" : "text"}
           id={f}
@@ -50,6 +50,7 @@ function LoginForm() {
 
   return (
     <form className="LoginForm" onSubmit={handleSubmit}>
+      <h2 className="mt-2">Login</h2>
       <div className="mb-3">
         {renderFormFields()}
         <button className="btn btn-info">Submit!</button>
