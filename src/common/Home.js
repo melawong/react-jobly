@@ -7,10 +7,16 @@ function Home() {
   return (
     <div className="homepage">
       <div className="col-12">
-        <h1>Jobly</h1>
-        <p>All the jobs in one, convenient place.</p>
+        <h1 className="homepage-title display-1 fw-bolder pb-5">
+          <strong>Jobly</strong>
+        </h1>
+        <h3 className="homepage-text fw-bolder pt-4 mt-4">
+          All the jobs in one, convenient place.
+        </h3>
         {user ? (
-          <h2> Welcome Back, {user.username}! </h2>
+          <h4 className="homepage-text fw-bolder">
+            Welcome Back, {user.firstName}!
+          </h4>
         ) : (
           <>
             <button className="btn btn-primary mx-1">

@@ -39,8 +39,24 @@
 
 .homepage {
   height: calc(100vh - 150px);
-  display: flex;
-  align-items: center;
+  /* align-items: center; */
+  margin-bottom: 100px;
   color: #fff;
-  text-shadow: 2px 2px 5px #34302f;
+  background-image: linear-gradient(rgba(69, 67, 67, 0), rgba(67, 67, 67, 0.8)),
+    url("../public/joblyhomeimg.jpeg");
+  background-size: cover;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+  background-position: center top;
+}
+
+.homepage-title {
+  text-shadow: 3px 3px 3px #0c0b0a;
+}
+
+.homepage-text {
+  text-shadow: 2px 2px 2px #0c0b0a;
 }

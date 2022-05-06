@@ -35,8 +35,8 @@ function CompanyDetail() {
     } else {
       return (
         <>
-          <h1>{company.name}</h1>
-          <p>{company.description}</p>
+          <h1 className="mt-3 display-5">{company.name}</h1>
+          <h5 className="mb-3 fw-light">{company.description}</h5>
           <JobCardList jobs={company.jobs} />
         </>
       );

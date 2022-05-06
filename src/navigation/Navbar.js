@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import UserContext from "../userContext";
 
-
 /** Navigation bar displays links to routes */
 
 function Navbar() {
@@ -76,5 +75,3 @@ function Navbar() {
 }
 
 export default Navbar;
-
-

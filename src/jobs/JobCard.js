@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import UserContext from "../userContext";
+import NumberFormat from "react-number-format";
 /** Displays a single job card
  *
  * props - job
@@ -33,12 +34,30 @@ function JobCard({ job }) {
       className="card border-secondary mb-3 mx-auto container-flex"
       style={{ maxWidth: "40rem" }}
     >
-      <div className="card-header">{job.companyName}</div>
-      <div className="card-body">
-        <h4 className="card-title">{job.title}</h4>
-        <p className="card-text">Salary: {job.salary}</p>
-        <p className="card-text">Equity: {job.equity}</p>
-        <form onSubmit={handleSubmit}>{renderButton()}</form>
+      <div className="row">
+        <div className="card-body col-md-9" style={{ textAlign: "left" }}>
+          <h4 className="card-title">{job.title}</h4>
+          <div className="card-subtitle">
+            <strong>{job.companyName}</strong>
+          </div>
+          <p className="card-text">
+            Salary:{" "}
+            <NumberFormat
+              value={job.salary}
+              displayType={"text"}
+              thousandSeparator={true}
+              prefix={"$"}
+            />{" "}
+            , Equity: {job.equity}
+          </p>
+        </div>
+        <form
+          className="col-md-3 mt-2 pe-3"
+          style={{ textAlign: "right" }}
+          onSubmit={handleSubmit}
+        >
+          {renderButton()}
+        </form>
       </div>
     </div>
   );
