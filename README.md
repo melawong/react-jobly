@@ -1,3 +1,6 @@
+<details>
+  <summary>Create React App Help</summary>
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -68,3 +71,47 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+</details>
+
+# Notes/Documentation from frontend development
+
+## What
+
+This application is a resource for users to sign up, search for, and apply to jobs.
+
+## How
+
+The application was developed using React.js for the frontend, Express for the backend, and PSQL for the database.
+
+## Why/Intent
+
+The intent of the project was to build a full stack application specifically using React as the front end. The main objectives were to leverage React Components to build a single page application with user authentication and authorization
+
+## Frontend Higlights:
+
+- Authentication/Authorization allowed for protected routes
+  - Home page renders differently depending on if a user is logged in
+  - Login and Signup pages are only accessible to those NOT logged in
+  - Companies, jobs, profile are only accessible to those loggied in
+- Utilized Local Storage to store the logged-in user's JWT token in order to maintain state throughout
+- Implemented search bar to filter for companies and jobs by name/title (via call to api)
+- User Profile features a form to edit user information
+  - displays username but username is not editable
+  - calls api to update user info
+- Client-Side Authentication
+  - App component holds `useEffect` hook that checks for user token in local storage on refresh
+  - If user token exists, decode the payload using `jwtDecode` library. This returns the username which is used to call the API and retrieve the entire `user` object. This user object is stored in the `user` state and represents the current user.
+  - "Logging Out" does the following:
+    - Clears user JWT token from Local Storage
+    - Resets the `user` state in `App.js` to `null`
+    - Resets the `token` state to an empty string
+    - On page reload, the app will not find a user/token in local storage, which tells the app that no one is logged in. Renders the login/signup routes
+- Users are able to apply to jobs (represented by clicking a button on the job card). Applying to jobs updates the user's applications db/backend via API request. This triggers the application to rerender and automatically updates the `user` state. The jobs page renders an APPLY or APPLIED button depending on the user's applications in state. The user's applications (viewable on their profile page) accesses this same object/state to render appropriate jobs.
+- **Getting the user's applications** - `useEffect` uses array of job ids that lives in `user.applications` to create an array of job objects. Pulls data from API. Leverage `Promises.all` to await results from loop of api calls to consolidate to more efficiently await the axios call.
+- **`joblyApi.js` helper** - The application makes many calls to the api in many places. To abstract away these calls, `joblyApi` helper class utilizes static methods to simplify the various api calls that need to be made. `GET`, `POST`, `PATCH` requests can all be made using the same static method
+- App is styled using Bootstrap/Bootswatch Quartz theme.
+
+## Backend Highlights:
+
+TBD
